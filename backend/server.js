@@ -18,6 +18,14 @@ connection.once('open', ()=> {
     console.log("MongoDB database connection established successfully");
 })
 
+const accountsRouter = require('./routes/accounts');
+const usersRouter = require('./routes/users');
+
+//Now when someone uses /accounts or /users it will just go to the router folder
+app.use('/accounts', accountsRouter);
+app.use('/users', usersRouter);
+
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
