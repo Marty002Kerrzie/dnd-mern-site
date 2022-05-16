@@ -6,6 +6,9 @@ export default class ResetUserPassword extends Component {
             <div>
                 Welcome to reset your password! <br /> Please input the email associated with your account: <br />
                 <input type="text" placeholder="Email" />
+                <br /> 
+                <br />
+                <button><em>SUBMIT</em></button>
             </div>
         )
     };

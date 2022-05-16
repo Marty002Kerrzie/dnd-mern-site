@@ -14,6 +14,8 @@ export default class SignUserUp extends Component {
                 <p>Password: </p>
                 <input type="password" placeholder="Password" />
                 <br />
+                <br />
+                <button><em>SIGN UP NOW</em></button>
             </div>
         )
     };

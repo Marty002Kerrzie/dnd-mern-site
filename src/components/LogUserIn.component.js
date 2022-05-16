@@ -10,6 +10,8 @@ export default class LogUserIn extends Component {
                 <p>Password: </p>
                 <input type="password" placeholder="Password" />
                 <br />
+                <br />
+                <button><em>LOG IN</em></button>
             </div>
         )
     };

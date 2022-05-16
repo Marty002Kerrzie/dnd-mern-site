@@ -45,3 +45,9 @@ function App() {
 };
 
 export default App;
+
+//Router holds the different paths like a mother holding a child
+//Switch just stops the router from looking for code when it gets a hit
+// exact on Home keeps it from stopping at Home every time
+//Route sets the path
+//Nav sits outside the routes so that it is always displayed
