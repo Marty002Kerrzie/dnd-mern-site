@@ -16,6 +16,7 @@ import Home from "./components/HomePage.component";
 
 function App() {
   return (
+    <div className="backgroundApp">
     <Router>
       <div>
         <nav className="container">
@@ -41,6 +42,8 @@ function App() {
           </nav>
         </div>
       </Router>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </div>
   );
 };
 

@@ -1,0 +1,36 @@
+.gridContainer{
+    display: grid;
+    grid-template-areas:
+    "header header"
+    "photo sidebar"
+    "info sidebar"
+    "footer footer";
+    text-align: center;
+}
+
+.borderGive{
+    border: solid 2px;
+     border-radius: 10px;
+     margin: 1%;
+     padding: 2%, 0, 2%, 0;
+}
+
+.header{
+    grid-area: header;
+}
+
+.photo{
+    grid-area: photo;
+}
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+.info{
+    grid-area: info;
+}
+
+.footer{
+    grid-area: footer;
+}
