@@ -1,29 +1,28 @@
-import React, { Component, useState } from 'react';
-import './LogUserIn.css';
-
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const SignUserUp = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isPending, setIsPending] = useState(false);
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setIsPending(true);
+
         const account = { email, username, password };
         
-        fetch('http://localhost:3000/routes', {
-            method: 'POST',
-            headers: {"Content-Type": "new Account"},
-            body: JSON.stringify(account)
-        }).then(() => {
-            console.log('new blog is added');
-        })
+        console.log('new account is added');
+        setIsPending(false);
+        history.push('./')
     }
 
         return(
-            <div className="contGrid">
-                <div className="logIn giveBorder">
+            <div>
+                <div>
                     <p>Welcome to Sign User Up</p>
                     <form name ="Sign Up" onSubmit = {handleSubmit}>
                         <label for="Email">Email: </label>
@@ -54,13 +53,14 @@ const SignUserUp = () => {
                             onChange = {(e) => setPassword(e.target.value)}
                             />
                         <br />
-                        <button>SIGN UP</button>
+                        { !isPending && <button>SIGN UP</button>}
+                        { isPending && <button disabled>SIGNING YOU UP...</button>}
                     </form>
                 </div>
-                <div className="picture giveBorder">
+                <div>
                     PICTURE
                 </div>
-                <div className="footer giveBorder">
+                <div>
                     FOOTER
                 </div>
             </div>

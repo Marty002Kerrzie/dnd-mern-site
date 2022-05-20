@@ -1,29 +1,59 @@
-import React, { Component } from 'react';
-import './LogUserIn.css';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default class ResetUserPassword extends Component {
-    render() {
+const ResetUserPassword = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isPending, setIsPending] = useState(false);
+    const history = useHistory();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setIsPending(true);
+
+        const account = { email, password };
+        
+        console.log('Password Changed');
+        setIsPending(false);
+        history.push('./')
+    }
+
         return(
-            <div className="contGrid">
-                <div className="logIn giveBorder">
-                    <p>Welcome to reset your password!</p>
-                    <form name="Password Reset">
-                        <label for="email">Input Account Email: </label>
-                        <input type="text" placeholder="Email" />
+            <div>
+                <div>
+                    <p>Welcome to Reset Password</p>
+                    <form name ="Sign Up" onSubmit = {handleSubmit}>
+                        <label for="Email">Email: </label>
+                        <input 
+                            type="text" 
+                            required
+                            placeholder="email"
+                            value = {email}
+                            onChange = {(e) => setEmail(e.target.value)}
+                            />
                         <br />
-                        <input type="checkbox" />
-                        <label for="check">Are you sure?</label>
+                        <label for="Password">Password: </label>
+                        <input 
+                            type="password" 
+                            required 
+                            placeholder="password"
+                            value = {password}
+                            onChange = {(e) => setPassword(e.target.value)}
+                            />
                         <br />
-                        <button>SUBMIT</button>
+                        { !isPending && <button>SIGN UP</button>}
+                        { isPending && <button disabled>SIGNING YOU UP...</button>}
                     </form>
                 </div>
-                <div className="picture giveBorder">
-                    picture
+                <div>
+                    PICTURE
                 </div>
-                <div className="footer giveBorder">
-                    Footer
+                <div>
+                    FOOTER
                 </div>
             </div>
         )
     };
-};
+
+export default ResetUserPassword;
