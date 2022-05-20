@@ -5,12 +5,10 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>
 );
 
-//TAKE OUT THE REACt.STRICTMODE TO RUN THE APP FASTER - THIS KILLS THE LINKS AS IT REQUIRES MANUAL RELOADING OF THE PAGES
+//<React.StrictMode></React.StrictMode>TAKE OUT THE REACt.STRICTMODE TO RUN THE APP FASTER - THIS KILLS THE LINKS AS IT REQUIRES MANUAL RELOADING OF THE PAGES
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
