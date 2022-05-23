@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 
 const Account = require('../models/accountModel');
+const User = require('../models/userModel');
 
 
 //description: Get Accounts
@@ -8,9 +9,9 @@ const Account = require('../models/accountModel');
 //@access private
 
 const getAccount = asyncHandler(async (req, res) => {
-    const account = await Account.find()
+    const character = await Account.find( { user: req.user.id })
 
-    res.status(200).json({ account })
+    res.status(200).json({ character })
 })
 
 //description: set Accounts
@@ -18,21 +19,22 @@ const getAccount = asyncHandler(async (req, res) => {
 //@access private
 
 const setAccount = asyncHandler(async (req, res) => {
-    if(!req.body.username) {
+    if(!req.body.character) {
         res.status(400)
-        throw new Error('please add a username')
-    } else if (!req.body.email) {
+        throw new Error('please add a Name for your character')
+    } else if (!req.body.race) {
         res.status(400)
-        throw new Error('please add an email')
-    } else if (!req.body.password) {
+        throw new Error("please add your character's race")
+    } else if (!req.body.level) {
         res.status(400)
-        throw new Error('please add an email')
+        throw new Error('please add your level')
     } 
 
     const account = await Account.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+        character: req.body.character,
+        race: req.body.race,
+        level: req.body.level,
+        user: req.user.id
     })
 
     res.status(200).json({ account })
@@ -50,10 +52,25 @@ const putAccount = asyncHandler(async (req, res) => {
         throw new Error('Account not found')
     }
 
+    const user = await User.findById(req.user.id)
+
+    //check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //make sure the logged in user matches the account creator
+    if(account.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
     const updatedAccount = await Account.findByIdAndUpdate(req.params.id, req.body, {
-        username: req.body.username,
-        email: req.body.username,
-        password: req.body.password,
+        character: req.body.character,
+        race: req.body.race,
+        level: req.body.level,
+        user: req.user.id,
         new: true,
     })
 
@@ -70,7 +87,21 @@ const deleteAccount = asyncHandler(async (req, res) => {
 
     if (!account) {
         res.status(400)
-        throw new Error('Account not found')
+        throw new Error('Character not found')
+    }
+
+    const user = await User.findById(req.user.id)
+
+    //check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //make sure the logged in user matches the account creator
+    if(account.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
     }
     
     await account.remove()
