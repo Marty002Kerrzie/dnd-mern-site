@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const SignUserUp = () => {
+const ResetUserPassword = () => {
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
 
@@ -14,10 +12,9 @@ const SignUserUp = () => {
 
         setIsPending(true);
 
-        const account = { email, username, password };
+        const account = { email, password };
         
-        console.log('new account is added');
-
+        console.log('Password Changed');
         setIsPending(false);
         history.push('./')
     }
@@ -25,7 +22,7 @@ const SignUserUp = () => {
         return(
             <div>
                 <div>
-                    <p>Welcome to Sign User Up</p>
+                    <p>Welcome to Reset Password</p>
                     <form name ="Sign Up" onSubmit = {handleSubmit}>
                         <label for="Email">Email: </label>
                         <input 
@@ -36,16 +33,6 @@ const SignUserUp = () => {
                             onChange = {(e) => setEmail(e.target.value)}
                             />
                         <br />
-                        <label for="Username">Username: </label>
-                        <input 
-                            type="text" 
-                            required 
-                            placeholder="username"
-                            value = {username}
-                            onChange = {(e) => setUsername(e.target.value)}
-                            />  
-                                
-                        <br />
                         <label for="Password">Password: </label>
                         <input 
                             type="password" 
@@ -55,17 +42,8 @@ const SignUserUp = () => {
                             onChange = {(e) => setPassword(e.target.value)}
                             />
                         <br />
-                        <label for="re-type password">Confirm Password: </label>
-                        <input  
-                            type="password"
-                            required
-                            placeholder="confirm password"
-                            value = {password2}
-                            onChange = {(e) => setPassword2(e.target.value)}
-                            />
-                        <br />
-                        { !isPending && <button>SIGN UP</button>}
-                        { isPending && <button disabled>SIGNING YOU UP...</button>}
+                        { !isPending && <button>CHANGE PASSWORD</button>}
+                        { isPending && <button disabled>SENDING EMAIL...</button>}
                     </form>
                 </div>
                 <div>
@@ -78,4 +56,4 @@ const SignUserUp = () => {
         )
     };
 
-    export default SignUserUp;
+export default ResetUserPassword;
