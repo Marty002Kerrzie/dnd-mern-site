@@ -51,3 +51,4 @@ export default App;
 // exact on Home keeps it from stopping at Home every time
 //Route sets the path
 //Nav sits outside the routes so that it is always displayed
+//grrr
